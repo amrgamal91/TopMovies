@@ -4,46 +4,26 @@ const LEFT_PAGE = "LEFT";
 const RIGHT_PAGE = "RIGHT";
 
 class NewPagination extends Component {
+  /**
+   *
+   * initialize the base attributes of pagination :
+   * pageLimit :max num of items per page
+   * itemsCount :total number of movies to be divided over pages
+   * pageNeighbours : num of page numbers beside current page (right & left)
+   * totaPages : number of pages for all movies
+   * finally , set current page to 1 as state
+   */
   constructor(props) {
-    // console.log("here in the consturctor: " + JSON.stringify(props));
-    // super(props);
-    // const {
-    //   itemsCount,
-    //   pageLimit,
-    //   pageNeighbours,
-
-    //   onPageChanged
-    // } = props;
-    // this.pageLimit = typeof pageLimit === "number" ? pageLimit : 30;
-    // this.itemsCount = typeof itemsCount === "number" ? itemsCount : 0;
-    // console.log("total records:" + this.itemsCount);
-    // console.log("pageLimit:" + this.pageLimit);
-    // // pageNeighbours can be: 0, 1 or 2
-    // this.pageNeighbours =
-    //   typeof pageNeighbours === "number"
-    //     ? Math.max(0, Math.min(pageNeighbours, 2))
-    //     : 0;
-    // this.totalPages = Math.ceil(this.itemsCount / this.pageLimit);
-
-    // this.state = { currentPage: 1 };
-    // // this.state = { currentPage: 1 };
-    // this.pages = this.fetchPageNumbers(this.currentPage);
-    // console.log("Number of pages = " + this.pages);
-
     super(props);
-    const { itemsCount = null, pageLimit = 30, pageNeighbours = 0 } = props;
-
-    this.pageLimit = typeof pageLimit === "number" ? pageLimit : 30;
+    const { itemsCount = null, pageLimit = 20, pageNeighbours = 0 } = props;
+    this.pageLimit = typeof pageLimit === "number" ? pageLimit : 20;
     this.itemsCount = typeof itemsCount === "number" ? itemsCount : 0;
-
     // pageNeighbours can be: 0, 1 or 2
     this.pageNeighbours =
       typeof pageNeighbours === "number"
         ? Math.max(0, Math.min(pageNeighbours, 2))
         : 0;
-
     this.totalPages = Math.ceil(this.itemsCount / this.pageLimit);
-
     this.state = { currentPage: 1 };
   }
 
@@ -65,17 +45,19 @@ class NewPagination extends Component {
 
     /**
      * totalNumbers: the total page numbers to show on the control
+     * totalNumbers: (2 neighbors right + 2 on left ) + current page + 2 terminal pages
      * totalBlocks: totalNumbers + 2 to cover for the left(<) and right(>) controls
      */
     const totalNumbers = this.pageNeighbours * 2 + 3;
     const totalBlocks = totalNumbers + 2;
 
+    /**
+     * when pages need to be hidden (num of blocks not enough for num of pages)
+     * */
     if (totalPages > totalBlocks) {
       const startPage = Math.max(2, currentPage - pageNeighbours);
       const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
-
-      let pages = _.range(startPage, endPage);
-      console.log("pages: ..........:" + JSON.stringify(pages.length));
+      let pages = _.range(startPage, endPage + 1);
 
       /**
        * hasLeftSpill: has hidden pages to the left
@@ -116,14 +98,12 @@ class NewPagination extends Component {
   };
 
   render() {
-    // if (!this.totalRecords || this.totalPages === 1) return (null);
-
     const { currentPage } = this.state;
     const pages = this.fetchPageNumbers();
 
     return (
       <div className="row justify-content-center ">
-        <nav aria-label="Countries Pagination">
+        <nav aria-label="pagination">
           <ul className="pagination">
             {pages.map((page, index) => {
               if (page === LEFT_PAGE)
@@ -179,36 +159,46 @@ class NewPagination extends Component {
     );
   }
 
+  /**
+   * start the app on page 1
+   */
   componentDidMount() {
-    console.log("in the second pagination ............");
     this.gotoPage(1);
   }
 
+  /**
+   * set state with the new current page &
+   * pass handle change method
+   */
   gotoPage = page => {
-    const { onPageChanged = f => f } = this.props;
-
+    const { onPageChanged } = this.props;
     const currentPage = Math.max(0, Math.min(page, this.totalPages));
-
-    const paginationData = {
-      currentPage,
-      totalPages: this.totalPages,
-      pageLimit: this.props.pageLimit,
-      itemsCount: this.props.itemsCount
-    };
-
+    const paginationData = { currentPage, totalPages: this.totalPages };
     this.setState({ currentPage }, () => onPageChanged(paginationData));
   };
 
+  /**
+   * handles click of each page , just call gotoPage method
+   * page : # of page
+   */
   handleClick = page => evt => {
     evt.preventDefault();
     this.gotoPage(page);
   };
 
+  /**
+   *  (1) < ={10 11} [12] {13 14}= > (23) , left means get the previous set of 5 pages
+   *  (1) < ={5 6} [7] {8 9}= > (23)
+   */
   handleMoveLeft = evt => {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
   };
 
+  /**
+   *  (1) < ={10 11} [12] {13 14}= > (23) , right means get the next set of 5 pages
+   *  (1) < ={15 16} [17] {18 19}= > (23)
+   */
   handleMoveRight = evt => {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);

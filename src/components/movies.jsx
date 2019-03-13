@@ -154,10 +154,7 @@ class Movies extends Component {
   };
 
   onPageChanged = data => {
-    const { currentPage, totalPages, pageLimit } = data;
-
-    const offset = (currentPage - 1) * pageLimit;
-
+    const { currentPage, totalPages } = data;
     this.setState({ currentPage, totalPages });
   };
 
@@ -197,12 +194,12 @@ class Movies extends Component {
             onSort={this.handleSort}
           />
           {/* page numbers */}
-          <Pagination
+          {/* <Pagination
             itemsCount={totalCount}
             pageSize={this.state.pageSize}
             currentPage={this.state.currentPage}
             onPageChange={this.handlePageChange}
-          />
+          /> */}
 
           {/* <div className="d-flex flex-row py-4 align-items-center"> */}
           <NewPagination
