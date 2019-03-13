@@ -1,0 +1,9 @@
+{
+  "apiUrl": "https://api.themoviedb.org/3/discover/movie?api_key=cfe422613b250f702980a3bbf9e90716&language=en-US&primary_release_year=2018&sort_by=popularity.desc&include_video=false",
+  "apiKey": "&api_key=cfe422613b250f702980a3bbf9e90716",
+  "currentYearMovies": "/discover/movie?primary_release_year=2018&sort_by=vote_average.desc",
+  "genresUrl": "https://api.themoviedb.org/3/genre/movie/list?api_key=cfe422613b250f702980a3bbf9e90716&language=en-US",
+  "movieInfo": "https://api.themoviedb.org/3/movie/",
+
+  "moviesURL": "https://api.themoviedb.org/3/discover/movie?api_key=cfe422613b250f702980a3bbf9e90716&language=en-US&region=US&sort_by=vote_average.desc&include_video=false&page=1&vote_count.gte=100&vote_average.gte=6&primary_release_year=2017"
+}

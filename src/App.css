@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css?family=Sniglet");
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.Dropdown-root {
+  line-height: 1.3;
+}
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.padding-outer {
+  padding: 2em;
+}
+
+.padding-inner {
+  padding: 0.5em;
+}
+.cardcont {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.meta-data {
+  font-family: "Sniglet", cursive;
+  color: whitesmoke;
+  padding: 0.1rem !important;
+}
+.meta-data-element {
+  display: block;
+}
+.meta-data-val {
+  font-family: "Sniglet", cursive;
+  color: whitesmoke;
+  font-size: 1rem;
+}
+.movie-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: whitesmoke;
+  font-size: 2.2rem;
+}
+.overview {
+  color: whitesmoke;
+}
+.subtitles {
+  color: crimson;
+  font-size: 1.3rem;
+  display: flex;
+}
+.prod {
+  color: whitesmoke;
+  font-size: 1rem;
+}
+.movies-tb-header {
+  font-family: "Sniglet", cursive;
+  color: crimson;
+  font-size: 1.4rem;
+}
+.table th,
+.table td {
+  padding: 0.35rem !important;
+  vertical-align: middle !important;
+  border-top: 1px solid #dee2e6;
+}
+.movie-meta-data {
+  font-family: "Sniglet", cursive;
+  color: whitesmoke;
+  font-size: 1.2em;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle !important;
+  margin: 0 auto !important;
+}
+.title {
+  color: lightseagreen;
+}
+.genre {
+  line-height: 0.6;
+}
+.rate {
+  color: goldenrod;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
