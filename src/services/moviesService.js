@@ -9,11 +9,12 @@ import http from "./httpService";
 
 let allMovies = [];
 
-export function getCurrentYearMovies() {
-  return http.get(moviesURL);
+export function getYearMovies(year) {
+  console.log("xxxxxxxxxxxxxxxx.............:" + moviesURL + year);
+  return http.get(moviesURL + year);
 }
 
-export function getPageMovies(pageNum) {
+export function getPageMovies(pageNum, year) {
   /**1- get num of pages
    * 2-loop over this num of pages
    * 3- append movies of each page to the current movies list
@@ -23,7 +24,10 @@ export function getPageMovies(pageNum) {
   //   const moviesList = http.get(moviesUrl);
   //   const moviesCount = moviesList.total_pages;
   //   return moviesCount;
-  return http.get(moviesURL + "&page=" + pageNum);
+  console.log(
+    "yyyyyyyyyyyyyyyyyyy.............:" + moviesURL + year + "&page=" + pageNum
+  );
+  return http.get(moviesURL + year + "&page=" + pageNum);
 }
 
 export function getMovieInfo(id) {

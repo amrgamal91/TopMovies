@@ -7,3 +7,13 @@ export function paginate(items, pageNumber, pageSize) {
     .take(pageSize)
     .value();
 }
+
+export function getYears() {
+  var firstYear = "1920";
+  var currentYear = new Date().getFullYear();
+
+  let arr = Array();
+
+  for (let i = currentYear; i >= firstYear; i--) arr.push(i);
+  return arr;
+}

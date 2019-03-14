@@ -3,9 +3,9 @@ import _ from "lodash";
 import MoviesTable from "./moviesTable";
 import Pagination from "./pagination";
 import NewPagination from "./newPagination";
-import { paginate } from "../utils/utils";
+import { paginate, getYears } from "../utils/utils";
 import SearchBox from "./searchBox";
-import { getCurrentYearMovies, getPageMovies } from "../services/moviesService";
+import { getYearMovies, getPageMovies } from "../services/moviesService";
 import FilterignDropdown from "./filteringDropdown";
 import { getAllGenres } from "../services/genreService";
 
@@ -19,7 +19,9 @@ class Movies extends Component {
     selectedGenre: null,
     genresMap: [],
     sortColumn: { path: "vote_average", order: "desc" },
-    totalPages: null
+    totalPages: null,
+    years: [],
+    selectedYear: null
   };
 
   columns = [
@@ -35,12 +37,21 @@ class Movies extends Component {
    */
   async componentDidMount() {
     this.getAllGenres();
-    const { data } = await getCurrentYearMovies();
-    const x_movies = data.results;
-    // console.log("movies : " + data.total_pages);
-    // this.setState({ movies });
-    const totalPages = data.total_pages > 50 ? 50 : data.total_pages;
-    this.getPageMoviess(totalPages);
+    this.setState({ selectedYear: "2018" /*new Date().getFullYear()*/ }, () =>
+      this.refreshComponent(this.state.selectedYear)
+    );
+    console.log("here with the new selected year : " + this.state.selectedYear);
+    // const { data } = await getYearMovies(this.state.SelectedYear);
+    // console.log("here with the new total pages : " + data.total_pages);
+
+    // const totalPages = data.total_pages > 50 ? 50 : data.total_pages;
+    console.log(
+      "totalPAges:......." +
+        // totalPages +
+        " " +
+        JSON.stringify(this.state.selectedYear)
+    );
+    // this.getMoviesPages(totalPages, this.state.SelectedYear);
 
     // let backdropIMG = "././public/images/cinema.jpeg";
     // console.log("the image path : " + backdropIMG);
@@ -58,17 +69,14 @@ class Movies extends Component {
     this.setState({ genres, genresMap: result });
   }
 
-  async getPageMoviess(pages) {
+  async getMoviesPages(pages, year) {
     let allMovies = "";
     for (let index = 1; index <= pages; index++) {
-      const { data } = await getPageMovies(index);
+      const { data } = await getPageMovies(index, year);
       const movies = data.results;
       allMovies = [...allMovies, ...movies];
     }
-    // allMovies.sort(this.compare);
-    // console.log(JSON.stringify(allMovies));
     this.setState({ movies: allMovies });
-    // console.log("state movies : " + JSON.stringify(this.state.movies));
   }
 
   compare(a, b) {
@@ -87,8 +95,30 @@ class Movies extends Component {
    */
   handleGenreSelect = genre => {
     this.setState({ selectedGenre: genre, currentPage: 1, searchQuery: "" });
+    // console.log("the selected genre is : " + this.state.selectedGenre);
+  };
+
+  handleYearSelect = year => {
+    console.log("value passed to handle select year : " + year.value);
+    this.setState(
+      {
+        selectedYear: year.value,
+        selectedGenre: this.state.selectedGenre,
+        currentPage: 1,
+        searchQuery: ""
+      },
+      () => this.refreshComponent(year.value)
+    );
     // console.log("the selected genre is : " + JSON.stringify(genre));
   };
+
+  async refreshComponent(year) {
+    const { data } = await getYearMovies(year);
+    const totalPages = data.total_pages > 50 ? 50 : data.total_pages;
+    console.log("here in refresh total Pages=" + totalPages);
+    this.getMoviesPages(totalPages, year);
+    this.render();
+  }
 
   /**
    * update the current page with the selected one
@@ -160,23 +190,33 @@ class Movies extends Component {
 
   render() {
     const { totalCount, data } = this.getData();
+    console.log("in render method ........ooooooooo : " + totalCount);
+    const allYears = getYears();
     if (!totalCount || !data) {
       return <p>loading.......</p>;
     }
-
     return (
       <div className="row justify-content-center padding-outer">
         <div className=" col-xs-12 col-md-12 col-lg-12 padding-inner">
           <div className="row justify-content-md-center ">
-            <div className="col-md-5">
-              <p>Filter By </p>
+            <div className="col-md-3">
+              <p>Select Year </p>
+              <FilterignDropdown
+                items={allYears}
+                onItemSelect={this.handleYearSelect}
+                placeholderText={this.state.selectedYear}
+              />
+            </div>
+            <div className="col-md-3">
+              <p>Select Genre </p>
               <FilterignDropdown
                 items={this.state.genres}
                 selectedItem={this.state.selectedGenre}
                 onItemSelect={this.handleGenreSelect}
+                placeholderText="All Genres"
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-5">
               <p>showing {this.state.movies.length} movies in imdb</p>
               <SearchBox
                 value={this.state.searchQuery}
@@ -193,15 +233,7 @@ class Movies extends Component {
             sortColumn={this.state.sortColumn}
             onSort={this.handleSort}
           />
-          {/* page numbers */}
-          {/* <Pagination
-            itemsCount={totalCount}
-            pageSize={this.state.pageSize}
-            currentPage={this.state.currentPage}
-            onPageChange={this.handlePageChange}
-          /> */}
-
-          {/* <div className="d-flex flex-row py-4 align-items-center"> */}
+          {console.log("here b4 pagination : " + totalCount)}
           <NewPagination
             itemsCount={totalCount}
             pageLimit={this.state.pageSize}
@@ -209,7 +241,6 @@ class Movies extends Component {
             currentPage={this.state.currentPage}
             onPageChanged={this.onPageChanged}
           />
-          {/* </div> */}
         </div>
       </div>
     );

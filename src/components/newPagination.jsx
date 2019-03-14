@@ -15,15 +15,20 @@ class NewPagination extends Component {
    */
   constructor(props) {
     super(props);
+    console.log(
+      "hrere is the props in the constructor : " + JSON.stringify(props)
+    );
     const { itemsCount = null, pageLimit = 20, pageNeighbours = 0 } = props;
-    this.pageLimit = typeof pageLimit === "number" ? pageLimit : 20;
+    this.pageLimit = typeof pageLimit === "number" ? pageLimit : 10;
     this.itemsCount = typeof itemsCount === "number" ? itemsCount : 0;
     // pageNeighbours can be: 0, 1 or 2
     this.pageNeighbours =
       typeof pageNeighbours === "number"
         ? Math.max(0, Math.min(pageNeighbours, 2))
         : 0;
+    console.log("items count in constructor : " + this.itemsCount);
     this.totalPages = Math.ceil(this.itemsCount / this.pageLimit);
+    console.log("total pages in constructor : " + this.totalPages);
     this.state = { currentPage: 1 };
   }
 
@@ -203,6 +208,13 @@ class NewPagination extends Component {
     evt.preventDefault();
     this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
   };
+
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps:", JSON.stringify(nextProps));
+    // if (this.props !== nextProps) {
+    this.setState(nextProps);
+    // }
+  }
 }
 
 export default NewPagination;
