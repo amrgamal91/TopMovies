@@ -11,6 +11,7 @@ class TableBody extends Component {
               <img
                 src={"http://image.tmdb.org/t/p/w92/" + singleMovie.poster_path}
                 className="img-fluid"
+                alt="movie poster"
               />{" "}
             </td>
             <td>

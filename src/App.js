@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import "./App.css";
 import Movies from "./components/movies";
-import NavBar from "./components/navBar";
 import { Route, Redirect, Switch } from "react-router-dom";
 import MovieForm from "./components/movieForm";
 class App extends Component {

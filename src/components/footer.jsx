@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 const Footer = () => {
   return (
     <footer className="footer page-footer font-small blue">

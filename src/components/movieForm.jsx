@@ -6,14 +6,12 @@ class MovieForm extends Component {
 
   async componentDidMount() {
     const { data } = await getMovieInfo(this.props.match.params.id);
-    console.log("here is the data : " + data);
     this.getCast();
     this.setState({ data });
     this.setBackgroundImage(this.state.data.backdrop_path);
   }
   async getCast() {
     const { data } = await getMovieCast(this.props.match.params.id);
-    // console.log("here is the caaaaast : " + JSON.stringify(data));
     this.setState({ cast: data });
   }
   setBackgroundImage(path) {
@@ -44,7 +42,6 @@ class MovieForm extends Component {
   }
 
   getCastNames(castList) {
-    console.log("castsssss:" + castList);
     let cast = "";
     if (castList) {
       castList.slice(0, 4).forEach(element => {
@@ -69,6 +66,7 @@ class MovieForm extends Component {
                   this.state.data.poster_path
                 }
                 style={{ height: "auto" }}
+                alt="Poster Content"
               />
             </div>
             <div className="col-md-6 col-lg-6">

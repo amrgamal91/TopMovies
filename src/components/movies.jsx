@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import MoviesTable from "./moviesTable";
-import Pagination from "./pagination";
 import NewPagination from "./newPagination";
 import { paginate, getYears } from "../utils/utils";
 import SearchBox from "./searchBox";
@@ -13,7 +12,7 @@ class Movies extends Component {
   state = {
     movies: [],
     genres: [],
-    pageSize: 10,
+    pageSize: 20,
     currentPage: 1,
     searchQuery: "",
     selectedGenre: null,
@@ -37,28 +36,9 @@ class Movies extends Component {
    */
   async componentDidMount() {
     this.getAllGenres();
-    this.setState({ selectedYear: "2018" /*new Date().getFullYear()*/ }, () =>
+    this.setState({ selectedYear: new Date().getFullYear() }, () =>
       this.refreshComponent(this.state.selectedYear)
     );
-    console.log("here with the new selected year : " + this.state.selectedYear);
-    // const { data } = await getYearMovies(this.state.SelectedYear);
-    // console.log("here with the new total pages : " + data.total_pages);
-
-    // const totalPages = data.total_pages > 50 ? 50 : data.total_pages;
-    console.log(
-      "totalPAges:......." +
-        // totalPages +
-        " " +
-        JSON.stringify(this.state.selectedYear)
-    );
-    // this.getMoviesPages(totalPages, this.state.SelectedYear);
-
-    // let backdropIMG = "././public/images/cinema.jpeg";
-    // console.log("the image path : " + backdropIMG);
-    // document.body.style.backgroundImage = 'url("' + backdropIMG + '")';
-    // console.log("background path : " + document.body.style.backgroundImage);
-    // document.body.style.backgroundSize = "cover";
-    // document.body.style.repeat = "no-repeat";
   }
 
   async getAllGenres() {
@@ -79,27 +59,14 @@ class Movies extends Component {
     this.setState({ movies: allMovies });
   }
 
-  compare(a, b) {
-    const first = a.vote_average;
-    const second = b.vote_average;
-    let comparison = 0;
-    if (first < second) {
-      comparison = 1;
-    } else if (first > second) {
-      comparison = -1;
-    }
-    return comparison;
-  }
   /**
    * handles Genre Selection, by updating state with the selected one
    */
   handleGenreSelect = genre => {
     this.setState({ selectedGenre: genre, currentPage: 1, searchQuery: "" });
-    // console.log("the selected genre is : " + this.state.selectedGenre);
   };
 
   handleYearSelect = year => {
-    console.log("value passed to handle select year : " + year.value);
     this.setState(
       {
         selectedYear: year.value,
@@ -109,15 +76,12 @@ class Movies extends Component {
       },
       () => this.refreshComponent(year.value)
     );
-    // console.log("the selected genre is : " + JSON.stringify(genre));
   };
 
   async refreshComponent(year) {
     const { data } = await getYearMovies(year);
     const totalPages = data.total_pages > 50 ? 50 : data.total_pages;
-    console.log("here in refresh total Pages=" + totalPages);
     this.getMoviesPages(totalPages, year);
-    this.render();
   }
 
   /**
@@ -190,7 +154,6 @@ class Movies extends Component {
 
   render() {
     const { totalCount, data } = this.getData();
-    console.log("in render method ........ooooooooo : " + totalCount);
     const allYears = getYears();
     if (!totalCount || !data) {
       return <p>loading.......</p>;
@@ -199,7 +162,7 @@ class Movies extends Component {
       <div className="row justify-content-center padding-outer">
         <div className=" col-xs-12 col-md-12 col-lg-12 padding-inner">
           <div className="row justify-content-md-center ">
-            <div className="col-md-3">
+            <div className="col-md-2">
               <p className="label">Select Year </p>
               <FilterignDropdown
                 items={allYears}
@@ -207,7 +170,7 @@ class Movies extends Component {
                 placeholderText={this.state.selectedYear}
               />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <p className="label">Select Genre </p>
               <FilterignDropdown
                 items={this.state.genres}
@@ -237,13 +200,13 @@ class Movies extends Component {
             sortColumn={this.state.sortColumn}
             onSort={this.handleSort}
           />
-          {console.log("here b4 pagination : " + totalCount)}
           <NewPagination
-            itemsCount={totalCount}
+            itemsCount={this.state.movies.length}
             pageLimit={this.state.pageSize}
             pageNeighbours={2}
             currentPage={this.state.currentPage}
             onPageChanged={this.onPageChanged}
+            key={totalCount}
           />
         </div>
       </div>
