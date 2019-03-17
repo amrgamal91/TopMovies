@@ -33,6 +33,7 @@ class TableHeader extends Component {
         <tr>
           {this.props.columns.map(singleColumn => (
             <th
+              scope="col"
               className="movies-tb-header"
               key={singleColumn.label}
               onClick={() => this.handleSort(singleColumn.columnName)}

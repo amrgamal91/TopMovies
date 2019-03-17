@@ -200,7 +200,7 @@ class Movies extends Component {
         <div className=" col-xs-12 col-md-12 col-lg-12 padding-inner">
           <div className="row justify-content-md-center ">
             <div className="col-md-3">
-              <p>Select Year </p>
+              <p className="label">Select Year </p>
               <FilterignDropdown
                 items={allYears}
                 onItemSelect={this.handleYearSelect}
@@ -208,7 +208,7 @@ class Movies extends Component {
               />
             </div>
             <div className="col-md-3">
-              <p>Select Genre </p>
+              <p className="label">Select Genre </p>
               <FilterignDropdown
                 items={this.state.genres}
                 selectedItem={this.state.selectedGenre}
@@ -217,7 +217,11 @@ class Movies extends Component {
               />
             </div>
             <div className="col-md-5">
-              <p>showing {this.state.movies.length} movies in imdb</p>
+              <p className="label">
+                showing{" "}
+                <span className="label-val">{this.state.movies.length}</span>{" "}
+                movies
+              </p>
               <SearchBox
                 value={this.state.searchQuery}
                 onChange={this.handleSearch}
