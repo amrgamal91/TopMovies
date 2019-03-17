@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import MoviesTable from "./moviesTable";
-import NewPagination from "./newPagination";
+import Pagination from "./pagination";
 import { paginate, getYears } from "../utils/utils";
 import SearchBox from "./searchBox";
 import { getYearMovies, getPageMovies } from "../services/moviesService";
@@ -201,7 +201,7 @@ class Movies extends Component {
           sortColumn={this.state.sortColumn}
           onSort={this.handleSort}
         />
-        <NewPagination
+        <Pagination
           itemsCount={this.state.movies.length}
           pageLimit={this.state.pageSize}
           pageNeighbours={2}
