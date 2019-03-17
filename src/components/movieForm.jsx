@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getMovieInfo, getMovieCast } from "../services/moviesService";
-
+// import Background from "./images/cinema-16.jpg";
 class MovieForm extends Component {
   state = { data: "", cast: [] };
 
@@ -8,14 +8,21 @@ class MovieForm extends Component {
     const { data } = await getMovieInfo(this.props.match.params.id);
     this.getCast();
     this.setState({ data });
-    this.setBackgroundImage(this.state.data.backdrop_path);
+    this.setBackgroundImage(
+      "https://image.tmdb.org/t/p/original" + this.state.data.backdrop_path
+    );
+  }
+  componentWillUnmount() {
+    document.body.style.backgroundImage = "";
+    // document.body.style.backgroundSize = "cover";
+    // document.body.style.repeat = "no-repeat";
   }
   async getCast() {
     const { data } = await getMovieCast(this.props.match.params.id);
     this.setState({ cast: data });
   }
   setBackgroundImage(path) {
-    let backdropIMG = "https://image.tmdb.org/t/p/original" + path;
+    let backdropIMG = path;
     document.body.style.backgroundImage = "url(" + backdropIMG + ")";
     document.body.style.backgroundSize = "cover";
     document.body.style.repeat = "no-repeat";

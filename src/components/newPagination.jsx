@@ -102,7 +102,7 @@ class NewPagination extends Component {
     const pages = this.fetchPageNumbers();
 
     return (
-      <div className="row justify-content-center ">
+      <div className="row justify-content-center pages">
         <nav aria-label="pagination">
           <ul className="pagination">
             {pages.map((page, index) => {

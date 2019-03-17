@@ -6,7 +6,7 @@ import "../index.css";
 class MoviesTable extends Component {
   render() {
     return (
-      <div className="cardcont col-xs-12 col-md-11 col-centered ">
+      <div className="cardcont col-xs-12 col-md-11 col-lg-11 col-centered ">
         <table className="table">
           <TableHeader
             columns={this.props.columns}

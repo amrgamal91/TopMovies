@@ -160,9 +160,9 @@ class Movies extends Component {
     }
     return (
       <div className="row justify-content-center padding-outer">
-        <div className=" col-xs-12 col-md-12 col-lg-12 padding-inner">
-          <div className="row justify-content-md-center ">
-            <div className="col-md-2">
+        <div className="col-xs-12 col-md-11 col-lg-11 col-centered">
+          <div className="row justify-content-md-center cardcont-f">
+            <div className="col-lg-2 col-md-2">
               <p className="label">Select Year </p>
               <FilterignDropdown
                 items={allYears}
@@ -170,7 +170,7 @@ class Movies extends Component {
                 placeholderText={this.state.selectedYear}
               />
             </div>
-            <div className="col-md-4">
+            <div className="col-lg-4 col-md-4">
               <p className="label">Select Genre </p>
               <FilterignDropdown
                 items={this.state.genres}
@@ -179,7 +179,7 @@ class Movies extends Component {
                 placeholderText="All Genres"
               />
             </div>
-            <div className="col-md-5">
+            <div className="col-lg-5 col-md-4">
               <p className="label">
                 showing{" "}
                 <span className="label-val">{this.state.movies.length}</span>{" "}
@@ -191,24 +191,24 @@ class Movies extends Component {
               />
             </div>
           </div>
-
-          {/* Table of Movies */}
-          <MoviesTable
-            moviesList={data}
-            genresMap={this.state.genresMap}
-            columns={this.columns}
-            sortColumn={this.state.sortColumn}
-            onSort={this.handleSort}
-          />
-          <NewPagination
-            itemsCount={this.state.movies.length}
-            pageLimit={this.state.pageSize}
-            pageNeighbours={2}
-            currentPage={this.state.currentPage}
-            onPageChanged={this.onPageChanged}
-            key={totalCount}
-          />
         </div>
+
+        {/* Table of Movies */}
+        <MoviesTable
+          moviesList={data}
+          genresMap={this.state.genresMap}
+          columns={this.columns}
+          sortColumn={this.state.sortColumn}
+          onSort={this.handleSort}
+        />
+        <NewPagination
+          itemsCount={this.state.movies.length}
+          pageLimit={this.state.pageSize}
+          pageNeighbours={2}
+          currentPage={this.state.currentPage}
+          onPageChanged={this.onPageChanged}
+          key={totalCount}
+        />
       </div>
     );
   }

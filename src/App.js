@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import Movies from "./components/movies";
 import { Route, Redirect, Switch } from "react-router-dom";

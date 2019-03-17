@@ -5,12 +5,13 @@ export function getYearMovies(year) {
   return http.get(moviesURL + year);
 }
 
+/**
+ * 1- get num of pages
+ * 2-loop over this num of pages
+ * 3- append movies of each page to the current movies list
+ * 4- return this list
+ */
 export function getPageMovies(pageNum, year) {
-  /**1- get num of pages
-   * 2-loop over this num of pages
-   * 3- append movies of each page to the current movies list
-   * 4- return this list
-   */
   return http.get(moviesURL + year + "&page=" + pageNum);
 }
 

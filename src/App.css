@@ -10,11 +10,12 @@
 .footer {
   background-color: darkslategray;
   border-radius: 3px;
+  /* line-height: 0.5; */
 }
 .footer-text {
   color: whitesmoke;
   font-family: "Sniglet", cursive;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
 }
 
 .App-header {
@@ -48,7 +49,14 @@
 }
 .cardcont {
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.73);
+  background-color: rgba(0, 0, 0, 0.75);
+  border: 2px solid blanchedalmond;
+}
+.cardcont-f {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border: 2px solid blanchedalmond;
+  margin-bottom: 0.5em;
 }
 .meta-data {
   font-family: "Sniglet", cursive;
@@ -72,10 +80,12 @@
 .label {
   font-family: "Sniglet", cursive;
   color: crimson;
+  font-weight: bold;
+  font-size: 1rem;
 }
 .label-val {
   font-family: "Sniglet", cursive;
-  color: rgba(32, 32, 60, 0.673);
+  color: rgba(223, 241, 255, 0.865);
   font-weight: bold;
 }
 .overview {
@@ -93,7 +103,7 @@
 .movies-tb-header {
   font-family: "Sniglet", cursive;
   color: crimson;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 .table th,
 .table td {
@@ -104,7 +114,7 @@
 .movie-meta-data {
   font-family: "Sniglet", cursive;
   color: whitesmoke;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   display: table-cell;
   text-align: left;
   vertical-align: middle !important;
@@ -113,11 +123,17 @@
 .title {
   color: lightseagreen;
 }
+.title:hover {
+  color: steelblue;
+}
 .genre {
   line-height: 0.6;
 }
 .rate {
   color: goldenrod;
+}
+.pages {
+  margin: 1rem;
 }
 @keyframes App-logo-spin {
   from {
