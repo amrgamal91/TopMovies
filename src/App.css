@@ -8,16 +8,18 @@
   height: 40vmin;
 }
 .footer {
-  background-color: darkslategray;
+  background-color: black;
   border-radius: 3px;
   /* line-height: 0.5; */
 }
 .footer-text {
-  color: whitesmoke;
+  color: crimson;
   font-family: "Sniglet", cursive;
   /* font-size: 1.2em; */
 }
-
+.footer-link:hover {
+  color: crimson;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -48,16 +50,23 @@
   padding: 0.5em;
 }
 .cardcont {
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  background-color: rgba(23, 26, 25, 0.85);
   border: 2px solid blanchedalmond;
 }
 .cardcont-f {
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  background-color: rgba(23, 26, 25, 0.85);
   border: 2px solid blanchedalmond;
   margin-bottom: 0.5em;
 }
+/* .pagination .page-item.active .page-link {
+  background-color: crimson;
+  border: crimson;
+}
+.pagination .page-item.active .page-link:hover {
+  background-color: crimson;
+} */
 .meta-data {
   font-family: "Sniglet", cursive;
   color: whitesmoke;

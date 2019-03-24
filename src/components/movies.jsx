@@ -7,6 +7,7 @@ import SearchBox from "./searchBox";
 import { getYearMovies, getPageMovies } from "../services/moviesService";
 import FilterignDropdown from "./filteringDropdown";
 import { getAllGenres } from "../services/genreService";
+import loading from "../spinner-loading.svg";
 
 class Movies extends Component {
   state = {
@@ -20,7 +21,8 @@ class Movies extends Component {
     sortColumn: { path: "vote_average", order: "desc" },
     totalPages: null,
     years: [],
-    selectedYear: null
+    selectedYear: null,
+    isLoading: true
   };
 
   columns = [
@@ -40,7 +42,9 @@ class Movies extends Component {
       this.refreshComponent(this.state.selectedYear)
     );
   }
-
+  demoAsyncCall() {
+    return new Promise(resolve => setTimeout(() => resolve(), 2500));
+  }
   async getAllGenres() {
     const { data } = await getAllGenres();
     const all = [{ id: 0, name: "All Genres" }, ...data.genres];
@@ -69,6 +73,7 @@ class Movies extends Component {
   handleYearSelect = year => {
     this.setState(
       {
+        isLoading: true,
         selectedYear: year.value,
         selectedGenre: this.state.selectedGenre,
         currentPage: 1,
@@ -82,6 +87,7 @@ class Movies extends Component {
     const { data } = await getYearMovies(year);
     const totalPages = data.total_pages > 50 ? 50 : data.total_pages;
     this.getMoviesPages(totalPages, year);
+    this.setState({ isLoading: false });
   }
 
   /**
@@ -154,15 +160,22 @@ class Movies extends Component {
 
   render() {
     const { totalCount, data } = this.getData();
-    const allYears = getYears();
-    if (!totalCount || !data) {
-      return <p>loading.......</p>;
+    let allYears = getYears();
+    if (!totalCount || !data || this.state.isLoading) {
+      return (
+        <div class="loading">
+          <header className="App-header">
+            <p>loading.......</p>
+            <img src={loading} className="App-logo" alt="loading" />
+          </header>
+        </div>
+      );
     }
     return (
       <div className="row justify-content-center padding-outer">
-        <div className="col-xs-12 col-md-11 col-lg-11 col-centered">
+        <div className="col-xs-12 col-md-11 col-lg-10 col-centered">
           <div className="row justify-content-md-center cardcont-f">
-            <div className="col-lg-2 col-md-2">
+            <div className=" col-lg-3 col-md-4">
               <p className="label">Select Year </p>
               <FilterignDropdown
                 items={allYears}

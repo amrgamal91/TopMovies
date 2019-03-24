@@ -13,5 +13,5 @@ export function getYears() {
   var currentYear = new Date().getFullYear();
   let arr = [];
   for (let i = currentYear; i >= firstYear; i--) arr.push(i);
-  return arr;
+  return ["All Years", ...arr];
 }
