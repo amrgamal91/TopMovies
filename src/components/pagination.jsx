@@ -100,9 +100,8 @@ class Pagination extends Component {
   render() {
     const { currentPage } = this.state;
     const pages = this.fetchPageNumbers();
-    console.log("pages:" + pages);
     return (
-      <div className="row justify-content-center pages">
+      <div className="col-xs-12 col-md-11 col-lg-10 col-centered  pages ">
         <nav aria-label="pagination">
           <ul className="pagination">
             {pages.map((page, index) => {

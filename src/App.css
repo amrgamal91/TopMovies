@@ -39,7 +39,7 @@
 }
 .col-centered {
   float: none;
-  margin: 0 auto;
+  /* margin: 0 auto !important; */
 }
 
 .padding-outer {
@@ -142,7 +142,9 @@
   color: goldenrod;
 }
 .pages {
-  margin: 1rem;
+  position: relative;
+  height: 100%;
+  margin: 1rem !important;
 }
 @keyframes App-logo-spin {
   from {
@@ -151,4 +153,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.pagination {
+  justify-content: center;
 }
