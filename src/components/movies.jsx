@@ -13,7 +13,7 @@ class Movies extends Component {
   state = {
     movies: [],
     genres: [],
-    pageSize: 20,
+    pageSize: 10,
     currentPage: 1,
     searchQuery: "",
     selectedGenre: null,
@@ -163,7 +163,7 @@ class Movies extends Component {
     let allYears = getYears();
     if (!totalCount || !data || this.state.isLoading) {
       return (
-        <div class="loading">
+        <div className="loading">
           <header className="App-header">
             <p>loading.......</p>
             <img src={loading} className="App-logo" alt="loading" />

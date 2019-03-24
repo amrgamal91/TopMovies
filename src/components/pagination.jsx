@@ -94,13 +94,13 @@ class Pagination extends Component {
       return [1, ...pages, totalPages];
     }
 
-    return _.range(1, totalPages);
+    return _.range(1, totalPages + 1);
   };
 
   render() {
     const { currentPage } = this.state;
     const pages = this.fetchPageNumbers();
-
+    console.log("pages:" + pages);
     return (
       <div className="row justify-content-center pages">
         <nav aria-label="pagination">
