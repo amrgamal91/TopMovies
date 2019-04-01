@@ -7,10 +7,12 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.min.css";
 import Footer from "./components/footer";
+import NavBar from "./components/navBar";
 
 ReactDOM.render(
   <BrowserRouter>
     <React.Fragment>
+      <NavBar />
       <App />
       <Footer />
     </React.Fragment>

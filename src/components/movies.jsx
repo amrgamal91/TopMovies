@@ -17,11 +17,11 @@ class Movies extends Component {
     currentPage: 1,
     searchQuery: "",
     selectedGenre: null,
-    genresMap: [],
+    genresMap: new Map(),
     sortColumn: { path: "vote_average", order: "desc" },
     totalPages: null,
     years: [],
-    selectedYear: null,
+    selectedYear: new Date().getFullYear(),
     isLoading: true
   };
 
@@ -38,12 +38,38 @@ class Movies extends Component {
    */
   async componentDidMount() {
     this.getAllGenres();
-    this.setState({ selectedYear: new Date().getFullYear() }, () =>
-      this.refreshComponent(this.state.selectedYear)
+    // this.setState({ selectedYear: new Date().getFullYear() }, () =>
+    //   this.refreshComponent(this.state.selectedYear)
+    // );
+    if (localStorage.getItem("movies")) this.hydrateStateWithLocalStorage();
+    else this.refreshComponent(this.state.selectedYear);
+    // add event listener to save state to localStorage
+    // when user leaves/refreshes the page
+    window.addEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
     );
   }
-  demoAsyncCall() {
-    return new Promise(resolve => setTimeout(() => resolve(), 2500));
+
+  hydrateStateWithLocalStorage() {
+    // for all items in state
+    for (let key in this.state) {
+      if (key === "genresMap") continue;
+      // if the key exists in localStorage
+      if (localStorage.hasOwnProperty(key)) {
+        // get the key's value from localStorage
+        let value = localStorage.getItem(key);
+
+        // parse the localStorage string and setState
+        try {
+          value = JSON.parse(value);
+          this.setState({ [key]: value });
+        } catch (e) {
+          // handle empty string
+          this.setState({ [key]: value });
+        }
+      }
+    }
   }
   async getAllGenres() {
     const { data } = await getAllGenres();
@@ -60,7 +86,9 @@ class Movies extends Component {
       const movies = data.results;
       allMovies = [...allMovies, ...movies];
     }
-    this.setState({ movies: allMovies });
+    this.setState({ movies: allMovies }, () =>
+      this.setState({ isLoading: false })
+    );
   }
 
   /**
@@ -79,7 +107,9 @@ class Movies extends Component {
         currentPage: 1,
         searchQuery: ""
       },
-      () => this.refreshComponent(year.value)
+      () => {
+        this.refreshComponent(year.value);
+      }
     );
   };
 
@@ -87,7 +117,26 @@ class Movies extends Component {
     const { data } = await getYearMovies(year);
     const totalPages = data.total_pages > 50 ? 50 : data.total_pages;
     this.getMoviesPages(totalPages, year);
-    this.setState({ isLoading: false });
+    // this.setState({ isLoading: false });
+  }
+
+  saveStateToLocalStorage() {
+    // for every item in React state
+    for (let key in this.state) {
+      if (key === "genresMap") continue;
+      // save to localStorage
+      localStorage.setItem(key, JSON.stringify(this.state[key]));
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+
+    // saves if component has a chance to unmount
+    this.saveStateToLocalStorage();
   }
 
   /**
@@ -215,7 +264,7 @@ class Movies extends Component {
           onSort={this.handleSort}
         />
         <Pagination
-          itemsCount={this.state.movies.length}
+          itemsCount={totalCount}
           pageLimit={this.state.pageSize}
           pageNeighbours={2}
           currentPage={this.state.currentPage}

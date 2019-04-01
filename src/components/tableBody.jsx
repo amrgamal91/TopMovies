@@ -3,6 +3,10 @@ import nl2br from "react-newline-to-break";
 import { Link } from "react-router-dom";
 class TableBody extends Component {
   render() {
+    if (this.props.genresMap === null) {
+      console.log("returning null ............." + this.props.data);
+      return null;
+    }
     return (
       <tbody>
         {this.props.data.map(singleMovie => (
@@ -25,9 +29,11 @@ class TableBody extends Component {
             <td className="movie-meta-data">{singleMovie.release_date}</td>
             <td className="movie-meta-data rate">{singleMovie.vote_average}</td>
             <td className="movie-meta-data genre">
-              {singleMovie.genre_ids.map(m =>
-                nl2br(this.props.genresMap.get(m) + "\n")
-              )}
+              {singleMovie !== null
+                ? singleMovie.genre_ids.map(item =>
+                    nl2br(this.props.genresMap.get(item) + "\n")
+                  )
+                : ""}
             </td>
           </tr>
         ))}

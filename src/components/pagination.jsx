@@ -24,7 +24,12 @@ class Pagination extends Component {
         ? Math.max(0, Math.min(pageNeighbours, 2))
         : 0;
     this.totalPages = Math.ceil(this.itemsCount / this.pageLimit);
-    this.state = { currentPage: 1 };
+
+    this.state = { currentPage: this.props.currentPage };
+  }
+
+  componentWillReceiveProps({ someProp }) {
+    this.setState({ ...this.state, someProp });
   }
 
   /**
@@ -159,7 +164,7 @@ class Pagination extends Component {
    * start the app on page 1
    */
   componentDidMount() {
-    this.gotoPage(1);
+    this.gotoPage(this.state.currentPage);
   }
 
   /**
