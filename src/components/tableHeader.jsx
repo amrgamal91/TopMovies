@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 class TableHeader extends Component {
+  /**
+   *
+   */
   handleSort = sortColumnPath => {
     const newSortColumn = { ...this.props.sortColumn };
     newSortColumn.path = sortColumnPath;

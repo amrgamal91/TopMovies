@@ -28,6 +28,16 @@ class Pagination extends Component {
     this.state = { currentPage: this.props.currentPage };
   }
 
+  /**
+   * start the app on the selected current page
+   */
+  componentDidMount() {
+    this.gotoPage(this.state.currentPage);
+  }
+
+  /***
+   * update the component with the new received props
+   */
   componentWillReceiveProps({ someProp }) {
     this.setState({ ...this.state, someProp });
   }
@@ -102,6 +112,44 @@ class Pagination extends Component {
     return _.range(1, totalPages + 1);
   };
 
+  /**
+   * set state with the new current page &
+   * pass handle change method
+   */
+  gotoPage = page => {
+    const { onPageChanged } = this.props;
+    const currentPage = Math.max(0, Math.min(page, this.totalPages));
+    const paginationData = { currentPage, totalPages: this.totalPages };
+    this.setState({ currentPage }, () => onPageChanged(paginationData));
+  };
+
+  /**
+   * handles click of each page , just call gotoPage method
+   * page : # of page
+   */
+  handleClick = page => evt => {
+    evt.preventDefault();
+    this.gotoPage(page);
+  };
+
+  /**
+   *  (1) < ={10 11} [12] {13 14}= > (23) , left means get the previous set of 5 pages
+   *  (1) < ={5 6} [7] {8 9}= > (23)
+   */
+  handleMoveLeft = evt => {
+    evt.preventDefault();
+    this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
+  };
+
+  /**
+   *  (1) < ={10 11} [12] {13 14}= > (23) , right means get the next set of 5 pages
+   *  (1) < ={15 16} [17] {18 19}= > (23)
+   */
+  handleMoveRight = evt => {
+    evt.preventDefault();
+    this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
+  };
+
   render() {
     const { currentPage } = this.state;
     const pages = this.fetchPageNumbers();
@@ -159,51 +207,6 @@ class Pagination extends Component {
       </div>
     );
   }
-
-  /**
-   * start the app on page 1
-   */
-  componentDidMount() {
-    this.gotoPage(this.state.currentPage);
-  }
-
-  /**
-   * set state with the new current page &
-   * pass handle change method
-   */
-  gotoPage = page => {
-    const { onPageChanged } = this.props;
-    const currentPage = Math.max(0, Math.min(page, this.totalPages));
-    const paginationData = { currentPage, totalPages: this.totalPages };
-    this.setState({ currentPage }, () => onPageChanged(paginationData));
-  };
-
-  /**
-   * handles click of each page , just call gotoPage method
-   * page : # of page
-   */
-  handleClick = page => evt => {
-    evt.preventDefault();
-    this.gotoPage(page);
-  };
-
-  /**
-   *  (1) < ={10 11} [12] {13 14}= > (23) , left means get the previous set of 5 pages
-   *  (1) < ={5 6} [7] {8 9}= > (23)
-   */
-  handleMoveLeft = evt => {
-    evt.preventDefault();
-    this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
-  };
-
-  /**
-   *  (1) < ={10 11} [12] {13 14}= > (23) , right means get the next set of 5 pages
-   *  (1) < ={15 16} [17] {18 19}= > (23)
-   */
-  handleMoveRight = evt => {
-    evt.preventDefault();
-    this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
-  };
 }
 
 export default Pagination;
