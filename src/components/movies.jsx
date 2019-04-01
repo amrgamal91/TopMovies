@@ -5,7 +5,7 @@ import Pagination from "./pagination";
 import { paginate, getYears } from "../utils/utils";
 import SearchBox from "./searchBox";
 import { get_Num_Movies_Pages, getPageMovies } from "../services/moviesService";
-import FilterignDropdown from "./filteringDropdown";
+import CustomDropDown from "./customDropDown";
 import { getAllGenres } from "../services/genreService";
 import loading from "../spinner-loading.svg";
 
@@ -252,7 +252,7 @@ class Movies extends Component {
           <div className="row justify-content-md-center cardcont-f">
             <div className=" col-lg-3 col-md-4">
               <p className="label">Select Year </p>
-              <FilterignDropdown
+              <CustomDropDown
                 items={allYears}
                 onItemSelect={this.handleYearSelect}
                 placeholderText={this.state.selectedYear}
@@ -260,7 +260,7 @@ class Movies extends Component {
             </div>
             <div className="col-lg-4 col-md-4">
               <p className="label">Select Genre </p>
-              <FilterignDropdown
+              <CustomDropDown
                 items={this.state.genres}
                 selectedItem={this.state.selectedGenre}
                 onItemSelect={this.handleGenreSelect}

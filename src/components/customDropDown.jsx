@@ -1,7 +1,7 @@
 import React from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-const filteringDropDown = props => {
+const customDropDown = props => {
   const { items, selectedItem, onItemSelect, placeholderText } = props;
   return (
     <Dropdown
@@ -13,4 +13,4 @@ const filteringDropDown = props => {
   );
 };
 
-export default filteringDropDown;
+export default customDropDown;
