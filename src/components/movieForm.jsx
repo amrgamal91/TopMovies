@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { getMovieInfo, getMovieCast } from "../services/moviesService";
-// import Background from "./images/cinema-16.jpg";
 class MovieForm extends Component {
   state = { data: "", cast: [] };
 
+  /**
+   * get all info of the current movie through the API
+   * get staff of the current Movie then update state & set background
+   */
   async componentDidMount() {
     const { data } = await getMovieInfo(this.props.match.params.id);
     this.getCast();
@@ -12,21 +15,40 @@ class MovieForm extends Component {
       "https://image.tmdb.org/t/p/original" + this.state.data.backdrop_path
     );
   }
+
+  /**
+   * remove the background(current movie poster) when unmount so that,
+   * it could not be set for the parent Component (movie component)
+   */
   componentWillUnmount() {
     document.body.style.backgroundImage = "";
-    // document.body.style.backgroundSize = "cover";
-    // document.body.style.repeat = "no-repeat";
   }
+
+  /**
+   * get staff of the current movie
+   * set cast state
+   */
   async getCast() {
     const { data } = await getMovieCast(this.props.match.params.id);
     this.setState({ cast: data });
   }
+
+  /**
+   * set the background of current movie
+   * @param {string} path path of the image online
+   */
   setBackgroundImage(path) {
     let backdropIMG = path;
     document.body.style.backgroundImage = "url(" + backdropIMG + ")";
     document.body.style.backgroundSize = "cover";
     document.body.style.repeat = "no-repeat";
   }
+
+  /**
+   * get genres names from list of genres objects
+   * @param {array} genreList array of genres objs
+   * returns : list of comma seprated genre names (for current movie)
+   */
   getGenreNames(genreList) {
     let genreNames = "";
     if (genreList) {
@@ -37,6 +59,12 @@ class MovieForm extends Component {
     }
     return genreNames;
   }
+
+  /**
+   * get production companies names from list of prod comps objs
+   * @param {array} companiesList array of comps objs
+   * returns : list of comma seprated prod companies names
+   */
   getProductionCompanies(companiesList) {
     let companiesNames = "";
     if (companiesList) {
@@ -48,6 +76,11 @@ class MovieForm extends Component {
     return companiesNames;
   }
 
+  /**
+   * get cast names from list of cast objs
+   * @param {array} castList array of cast objs
+   * returns : just first 4 names of actors from cast
+   */
   getCastNames(castList) {
     let cast = "";
     if (castList) {
@@ -89,7 +122,6 @@ class MovieForm extends Component {
                   <span className="genre-list subtitles">
                     {this.getGenreNames(this.state.data.genres)}
                   </span>
-                  {/* <br /> */}
                   <span className="cast">
                     {this.getCastNames(this.state.cast.cast)}
                   </span>
