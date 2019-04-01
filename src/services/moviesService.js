@@ -1,7 +1,7 @@
 import { apiKey, movieInfo, moviesURL } from "../config.json";
 import http from "./httpService";
 
-export function getYearMovies(year) {
+export function get_Num_Movies_Pages(year) {
   return http.get(moviesURL + year);
 }
 
