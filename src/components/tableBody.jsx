@@ -13,7 +13,9 @@ class TableBody extends Component {
           <tr key={singleMovie.id}>
             <td>
               <img
-                src={"http://image.tmdb.org/t/p/w92/" + singleMovie.poster_path}
+                src={
+                  "https://image.tmdb.org/t/p/w92/" + singleMovie.poster_path
+                }
                 className="img-fluid"
                 alt="movie poster"
               />{" "}
