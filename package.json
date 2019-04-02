@@ -2,7 +2,7 @@
   "name": "imdb",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://amrgamal91.github.io/Top-Movies",
+  "homepage": "https://amrgamal91.github.io/Top-Movies/",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
