@@ -7,6 +7,8 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        {/* adding the basename prop fixes the problem of no rendered content on github pages
+      https://medium.com/@Dragonza/react-router-problem-with-gh-pages-c93a5e243819 */}
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Switch>
             <Route path="/movies/:id" component={MovieForm} />
