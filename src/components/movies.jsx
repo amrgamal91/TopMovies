@@ -236,6 +236,9 @@ class Movies extends Component {
   render() {
     const { totalCount, data } = this.getPreparedData();
     let allYears = getYears();
+    console.log("totalCount : " + totalCount);
+    console.log("data : " + data);
+
     if (!totalCount || !data || this.state.isLoading) {
       return (
         <div className="loading">
