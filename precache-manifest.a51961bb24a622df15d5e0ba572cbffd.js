@@ -1,23 +1,23 @@
 self.__precacheManifest = [
   {
-    "revision": "961207592449ff28cbfc",
+    "revision": "1574c4eaf6ef0843124f",
     "url": "/TopMovies/static/css/main.c7c522a5.chunk.css"
   },
   {
-    "revision": "961207592449ff28cbfc",
-    "url": "/TopMovies/static/js/main.96120759.chunk.js"
+    "revision": "1574c4eaf6ef0843124f",
+    "url": "/TopMovies/static/js/main.1574c4ea.chunk.js"
   },
   {
     "revision": "583098a2299bc7667642",
     "url": "/TopMovies/static/js/runtime~main.583098a2.js"
   },
   {
-    "revision": "a2ea4545c348ca52b5c9",
+    "revision": "e7573fcea29b5c58e08b",
     "url": "/TopMovies/static/css/2.3c06308c.chunk.css"
   },
   {
-    "revision": "a2ea4545c348ca52b5c9",
-    "url": "/TopMovies/static/js/2.a2ea4545.chunk.js"
+    "revision": "e7573fcea29b5c58e08b",
+    "url": "/TopMovies/static/js/2.e7573fce.chunk.js"
   },
   {
     "revision": "54077faacb8c4ec67a41ccc56c62fb00",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/TopMovies/static/media/fontawesome-webfont.912ec66d.svg"
   },
   {
-    "revision": "6d0e2027c28da319b414fd0c6feb12ce",
+    "revision": "d45d5eeb8e051af824480e498d977ee2",
     "url": "/TopMovies/index.html"
   }
 ];
