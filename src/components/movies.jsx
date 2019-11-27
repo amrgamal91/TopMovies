@@ -198,6 +198,7 @@ class Movies extends Component {
   getPreparedData = () => {
     let filteredMovies = this.state.movies;
 
+    console.log("fitlered Movies: " + filteredMovies);
     if (this.state.searchQuery) {
       filteredMovies = this.state.movies.filter(m =>
         m.title
@@ -218,18 +219,22 @@ class Movies extends Component {
           ? this.state.movies.filter(m => m.genre_ids.includes(genreKey))
           : this.state.movies;
     }
+    console.log("fitlered Movies-2: " + filteredMovies);
 
     const sortedMovies = _.orderBy(
       filteredMovies,
       this.state.sortColumn.path,
       this.state.sortColumn.order
     );
+    console.log("stored Movies: " + sortedMovies);
 
     const pageMovies = paginate(
       sortedMovies,
       this.state.currentPage,
       this.state.pageSize
     );
+    console.log("page Movies: " + pageMovies);
+
     return { totalCount: filteredMovies.length, data: pageMovies };
   };
 
