@@ -1,0 +1,18 @@
+{
+  "main.css": "/TopMovies/static/css/main.c7c522a5.chunk.css",
+  "main.js": "/TopMovies/static/js/main.1acabb0b.chunk.js",
+  "main.js.map": "/TopMovies/static/js/main.1acabb0b.chunk.js.map",
+  "runtime~main.js": "/TopMovies/static/js/runtime~main.583098a2.js",
+  "runtime~main.js.map": "/TopMovies/static/js/runtime~main.583098a2.js.map",
+  "static/css/2.3c06308c.chunk.css": "/TopMovies/static/css/2.3c06308c.chunk.css",
+  "static/js/2.008b685c.chunk.js": "/TopMovies/static/js/2.008b685c.chunk.js",
+  "static/js/2.008b685c.chunk.js.map": "/TopMovies/static/js/2.008b685c.chunk.js.map",
+  "index.html": "/TopMovies/index.html",
+  "precache-manifest.3317ff6b5eb22c28b73e4147ed591d74.js": "/TopMovies/precache-manifest.3317ff6b5eb22c28b73e4147ed591d74.js",
+  "service-worker.js": "/TopMovies/service-worker.js",
+  "static/css/2.3c06308c.chunk.css.map": "/TopMovies/static/css/2.3c06308c.chunk.css.map",
+  "static/css/main.c7c522a5.chunk.css.map": "/TopMovies/static/css/main.c7c522a5.chunk.css.map",
+  "static/media/index.css": "/TopMovies/static/media/cinema-28.54077faa.jpg",
+  "static/media/font-awesome.min.css": "/TopMovies/static/media/fontawesome-webfont.fee66e71.woff",
+  "static/media/spinner-loading.svg": "/TopMovies/static/media/spinner-loading.ff6e5c7f.svg"
+}
