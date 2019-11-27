@@ -244,16 +244,16 @@ class Movies extends Component {
     console.log("totalCount : " + totalCount);
     console.log("data : " + data);
 
-    if (!totalCount || !data || this.state.isLoading) {
-      return (
-        <div className="loading">
-          <header className="App-header">
-            <p>loading.......</p>
-            <img src={loading} className="App-loading" alt="loading" />
-          </header>
-        </div>
-      );
-    }
+    // if (!totalCount || !data || this.state.isLoading) {
+    //   return (
+    //     <div className="loading">
+    //       <header className="App-header">
+    //         <p>loading.......</p>
+    //         <img src={loading} className="App-loading" alt="loading" />
+    //       </header>
+    //     </div>
+    //   );
+    // }
     return (
       <div className="row justify-content-center padding-outer">
         <div className="col-xs-12 col-md-11 col-lg-10 col-centered">
