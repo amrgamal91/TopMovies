@@ -7,7 +7,7 @@ class MoviesTable extends Component {
   render() {
     return (
       <div className="cardcont col-xs-12 col-md-11 col-lg-10 col-centered ">
-        <div class="table-responsive">
+        <div className="table-responsive">
           <table className="table ">
             <TableHeader
               columns={this.props.columns}

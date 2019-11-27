@@ -13,7 +13,8 @@ class App extends Component {
           <Switch>
             <Route path="/movies/:id" component={MovieForm} />
             <Route path="/movies" component={Movies} />
-            <Redirect from="/" exact to="/movies" />
+            <Route path="/" component={Movies} />
+            {/* <Redirect from="/" exact to="/movies" /> */}
           </Switch>
         </BrowserRouter>
       </div>
